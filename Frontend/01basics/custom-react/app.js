@@ -19,6 +19,7 @@ function customRendering(reactElememnt, rootContainer){
     rootContainer.appendChild(domElement)
 }
 
+
 const root = document.querySelector('#root')
 const reactElement = {
     type: "a",
