@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function DataFetch(){
-    const [dat, setData] = useState([])
-    
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetch()
+    })
 }
