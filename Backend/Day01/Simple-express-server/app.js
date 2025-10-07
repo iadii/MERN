@@ -13,3 +13,6 @@ app.get('/adii', (req, res) => {
         adii: "vats"
     })
 })
+
+
+app.listen(PORT)
