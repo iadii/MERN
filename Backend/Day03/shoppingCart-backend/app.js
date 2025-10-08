@@ -15,7 +15,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - body:`, req.body);
+
+  // console.log(`${now} - ${req.method} ${req.originalUrl} - ip: ${ip} - ua: ${ua} -${bodyPart}`);
   next();
 });
 
