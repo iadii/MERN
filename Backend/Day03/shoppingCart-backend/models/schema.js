@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.URI);
 const cartSchema = new mongoose.Schema({
   item: {
     type: String,
     required: true,
+  },
+  image:{
+    type: String,
+    required: false,
   },
   category: {
     type: String,

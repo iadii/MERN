@@ -1,26 +1,28 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const Cart = require('./models/schema');
+const express = require("express");
+const mongoose = require("mongoose");
+const Cart = require("./models/schema");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 
-require('dotenv').config();
+require("dotenv").config();
 const port = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(cors())
+mongoose.connect(process.env.URI);
 
-app.get('/cart', async(req, res) => {
-    const carts = await Cart.find();
-    res.json(carts);
+app.use(express.json());
+app.use(cors());
+
+app.get("/cart", async (req, res) => {
+  const carts = await Cart.find();
+  res.json(carts);
 });
 
-app.post('/cart', async(req, res) => {
-    const {item, category, price} = req.body;
-    await Cart.create({item, category, price});
-    res.status(201).json({
-      msg: 'Item added to cart'
-    });
+app.post("/cart", async (req, res) => {
+  const { item, category, image, price } = req.body;
+  await Cart.create({ item, category, image, price });
+  res.status(201).json({
+    msg: "Item added to cart",
+  });
 });
 
 app.listen(port, () => {
