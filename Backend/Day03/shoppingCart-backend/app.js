@@ -12,6 +12,13 @@ mongoose.connect(process.env.URI);
 app.use(express.json());
 app.use(cors());
 
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - body:`, req.body);
+  next();
+});
+
 app.get("/cart", async (req, res) => {
   const carts = await Cart.find();
   res.json(carts);
