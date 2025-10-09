@@ -26,7 +26,7 @@ app.get("/movie", async (req, res) => {
 app.post("/movie", async (req, res) => {
   const { title, genre, director, releaseDate, cast, image } = req.body;
   await Movie.create({ title, genre, director, releaseDate, cast, image });
-  res.status.json({
+  res.status(201).json({
     message: "Movie added successfully",
   });
 });
