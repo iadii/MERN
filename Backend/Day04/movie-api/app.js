@@ -1,5 +1,5 @@
 const express = require("express");
-const Mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const Movie = require("./models/schema");
 
