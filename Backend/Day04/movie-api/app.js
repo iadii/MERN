@@ -31,6 +31,20 @@ app.post("/movie", async (req, res) => {
   });
 });
 
+app.put('/movie/:id', (req, res) => {
+  const { id } = req.params;
+  const update = req.body;
+
+  Movie.findByIdAndUpdate(id, update, { new: true, runValidators: true })
+    .then((updatedMovie) => {
+      if (!updatedMovie) {
+        return res.status(404).json({ message: 'Movie not found' });
+      }
+      res.status(200).json({ message: 'Movie updated successfully', movie: updatedMovie });
+    })
+    
+});
+
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
