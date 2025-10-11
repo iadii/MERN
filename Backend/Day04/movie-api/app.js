@@ -42,7 +42,18 @@ app.put('/movie/:id', (req, res) => {
       }
       res.status(200).json({ message: 'Movie updated successfully', movie: updatedMovie });
     })
-    
+});
+
+app.delete('/movie/:id', (req, res) => {
+  const { id } = req.params;
+
+  Movie.findByIdAndDelete(id)
+    .then((deletedMovie) => {
+      if (!deletedMovie) {
+        return res.status(404).json({ message: 'Movie not found' });
+      }
+      res.status(200).json({ message: 'Movie deleted successfully', movie: deletedMovie });
+    })
 });
 
 app.listen(port, () => {
