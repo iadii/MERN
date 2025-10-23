@@ -51,3 +51,32 @@ Project Camp Backend is a RESTful API service designed to support collaborative 
 * **File Attcahments**: supports for multiple file attachments on tasks
 * **Task Assignments**: Assign tasks to specific team members
 * **Status Tracking**: Thre-state status system (todo, in-progress, Done)
+
+#### 3.5 Subtask Management
+* **Subtask Creation**: Add subtask to existing tasks
+* **Subtask Update**: Modify subtask details and completion status
+* **Subtask Deletion**: Remove Subtasks (Admin/ Project Admin only)
+* **Subtask Completion**: Allow members to mark subtasks as complete
+
+#### 3.6 Project Notes
+* **Note Creation**: Ads notes to projects (Admin only)
+* **Note Listing**: View all projects
+* **Note Details**: Access individual note content
+* **Note updates**: Modify existing notes (Admin only)
+* **Note Deletion**: Remove existing notes (Admin only)
+
+#### 3.7 System Health
+* **Health Check**: API end point for System statiu monitoring
+
+### 4. Technical Specifications
+
+#### 4.1 API Endpoints Structure
+##### Aunthentication Routes(```/api/v1/auth```)
+
+* **``` POST /register```**: User registraration
+* **``` POST /login```**: User authentication
+* **``` POST /logout```**: User logout (secured)
+* **``` GET /current-user```**: User logout (secured)
+* **``` GET /change-password```**: Change user password (secured)
+* **``` GET /refresh-token```**: Refresh access token
+* **``` GET /verify-email/:verificationToken```**: Email verification
