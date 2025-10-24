@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { healthCheck } from './routes/healthCheck.routes.js';
 const app = express();
 
 app.use(express.json({limit: "16kb"}))
@@ -11,7 +12,10 @@ app.use(cors({
     allowedHeaders: ["Authorization", "Content-Type"]
 }))
 
-app.get('/insta', (req, res) => {
+
+app.use('/api/v1/healthcheck', healthCheck)
+
+app.get('/', (req, res) => {
     res.send("")
 })
 
