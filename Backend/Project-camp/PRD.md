@@ -75,25 +75,48 @@ Project Camp Backend is a RESTful API service designed to support collaborative 
 
 * **``` POST /register```**: User registraration
 * **``` POST /login```**: User authentication
-* **``` POST /logout```**: User logout (secured)
-* **``` GET /current-user```**: User logout (secured)
-* **``` POST /change-password```**: Change user password (secured)
+* **``` POST /logout```**: User logout (Secured)
+* **``` GET /current-user```**: User logout (Secured)
+* **``` POST /change-password```**: Change user password (Secured)
 * **``` POST /refresh-token```**: Refresh access token
 * **``` GET /verify-email/:verificationToken```**: Email verification
 * **``` POST /forgot-password/```**: Request password reset
 * **``` POST /reset-password/:resetToken```**: reset forgotten password
-* **``` POST /resend-email-verification```**: reset verification email(secured)
+* **``` POST /resend-email-verification```**: reset verification email(Secured)
 
 ##### Project Routes(```/api/v1/projects```)
 
-* **``` GET /```**: List user projects (secured)
-* **``` POST /```**: Create projects (secured)
-* **``` GET /:projectId```**: Get project details (secured, role-based)
-* **``` PUT /:projectId```**: Update project (secured, Admin-only)
-* **``` DELETE /:projectId```**: Delete project (secured, Admin-only)
-* **``` GET /:projectId/members```**: List project members (secured)
-* **``` POST /:projectId/members```**: Add project members (secured, Admin-only)
-* **``` PUT /:projectId/members/:userId```**: Update member role (secured, Admin-only)
-* **``` DELETE /:projectId/members/:userId```**: Remove member (secured, Admin-only)
+* **``` GET /```**: List user projects (Secured)
+* **``` POST /```**: Create projects (Secured)
+* **``` GET /:projectId```**: Get project details (Secured, role-based)
+* **``` PUT /:projectId```**: Update project (Secured, Admin-only)
+* **``` DELETE /:projectId```**: Delete project (Secured, Admin-only)
+* **``` GET /:projectId/members```**: List project members (Secured)
+* **``` POST /:projectId/members```**: Add project members (Secured, Admin-only)
+* **``` PUT /:projectId/members/:userId```**: Update member role (Secured, Admin-only)
+* **``` DELETE /:projectId/members/:userId```**: Remove member (Secured, Admin-only)
 
 ##### Task Routes (```/api/v1/task```)
+
+* **``` GET /:projetId```**: List project tasks (Secured, role-based)
+* **``` POST /:projetId```**: Create tasks (Secured, Admin/Project Admin)
+* **``` GET /:projetId/t/:taskId```**: Get task details (Secured, role-based)
+* **``` PUT /:projetId/t/:taskId```**: Update task details (Secured, Admin/Project Admin)
+* **``` DELETE /:projetId/t/:taskId```**: Delete task (Secured, Admin/Project Admin)
+* **``` POST /:projetId/t/:taskId/subtask```**: create subtask (Secured, role-based)
+* **``` PUT /:projetId/st/:subTaskId```**: Update subtask (Secured, role-based)
+* **``` DELETE /:projetId/st/:subTaskId```**: Delete subtask (Secured, role-based)
+
+##### Note Routes (```/api/v1/notes```)
+
+* **``` GET /:projetId```**: List project notes (Secured, role-based)
+* **``` POST /:projetId```**: Create notes (Secured, Admin only)
+* **``` GET /:projetId/n/:noteId```**: Get note details (Secured, role-based)
+* **``` PUT /:projetId/n/:noteId```**: Update note (Secured, Admin only)
+* **``` DELETE /:projetId/n/:noteId```**: Delete note (Secured, Admin only)
+
+#### Health Check (```/api/v1/healthcheck```)
+
+* **``` GET /```**: System health status
+
+
