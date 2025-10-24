@@ -77,6 +77,23 @@ Project Camp Backend is a RESTful API service designed to support collaborative 
 * **``` POST /login```**: User authentication
 * **``` POST /logout```**: User logout (secured)
 * **``` GET /current-user```**: User logout (secured)
-* **``` GET /change-password```**: Change user password (secured)
-* **``` GET /refresh-token```**: Refresh access token
+* **``` POST /change-password```**: Change user password (secured)
+* **``` POST /refresh-token```**: Refresh access token
 * **``` GET /verify-email/:verificationToken```**: Email verification
+* **``` POST /forgot-password/```**: Request password reset
+* **``` POST /reset-password/:resetToken```**: reset forgotten password
+* **``` POST /resend-email-verification```**: reset verification email(secured)
+
+##### Project Routes(```/api/v1/projects```)
+
+* **``` GET /```**: List user projects (secured)
+* **``` POST /```**: Create projects (secured)
+* **``` GET /:projectId```**: Get project details (secured, role-based)
+* **``` PUT /:projectId```**: Update project (secured, Admin-only)
+* **``` DELETE /:projectId```**: Delete project (secured, Admin-only)
+* **``` GET /:projectId/members```**: List project members (secured)
+* **``` POST /:projectId/members```**: Add project members (secured, Admin-only)
+* **``` PUT /:projectId/members/:userId```**: Update member role (secured, Admin-only)
+* **``` DELETE /:projectId/members/:userId```**: Remove member (secured, Admin-only)
+
+##### Task Routes (```/api/v1/task```)
