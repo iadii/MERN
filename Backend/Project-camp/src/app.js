@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { healthCheck } from './routes/healthCheck.routes.js';
+import healthCheck from './routes/healthCheck.routes.js';
 const app = express();
 
 app.use(express.json({limit: "16kb"}))
@@ -19,4 +19,4 @@ app.get('/', (req, res) => {
     res.send("")
 })
 
-export default app; 
+export default app;     
