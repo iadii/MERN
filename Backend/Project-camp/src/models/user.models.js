@@ -72,3 +72,4 @@ UserSchema.methods.isPasswordCorrect = async function (password) {
 }
 
 mongoose.model("User", UserSchema);
+
