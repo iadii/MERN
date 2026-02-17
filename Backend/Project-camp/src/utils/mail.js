@@ -15,7 +15,7 @@ const emailVerificationMailContent = (username, verificationUrl) => {
             },
             outro: 'Need help or have query? Just reply to this email, we\'d love to help'
         }
-        
+
     }
 }
 
@@ -34,6 +34,8 @@ const forgotPasswordMailContent = (username, passwordResetUrl) => {
             },
             outro: 'Need help or have query? Just reply to this email, we\'d love to help'
         }
-        
+
     }
 }
+
+export { emailVerificationMailContent, forgotPasswordMailContent }
