@@ -114,8 +114,8 @@ UserSchema.methods.generateTemporaryToken = () => {
         .update(unHashedTokens)
         .digest("hex")
 
-    const temporaryTokenExpiry = Date.now() * (20 * 60 * 1000)
-    return { unHashedTokens, hashedTokens, temporaryTokenExpiry }
+    const TokenExpiry = Date.now() * (20 * 60 * 1000)
+    return { unHashedTokens, hashedTokens, TokenExpiry }
 }
 
 mongoose.model("User", UserSchema);
