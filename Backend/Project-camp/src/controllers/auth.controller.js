@@ -2,7 +2,7 @@ import { User } from '../models/user.models.js'
 import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-error.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { sendEMail } from "../utils/mail.js"
+import { sendEMail, emailVerificationMailContent } from "../utils/mail.js"
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -11,7 +11,7 @@ const generateAccessAndRefreshToken = async (userId) => {
         const refreshToken = user.generateRefreshToken();
 
         user.refreshToken = refreshToken;
-        await User.save({ validateBeforeSave: false })
+        await user.save({ validateBeforeSave: false })
         return { accessToken, refreshToken }
     } catch (error) {
         throw new ApiError(
@@ -40,8 +40,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const { unHashedTokens, hashedTokens, TokenExpiry } = user.generateTemporaryToken();
 
     user.emailVerificationToken = hashedTokens
-    user.emailVerficationExpiry = TokenExpiry
-    await User.save({ validateBeforeSave: false })
+    user.emailVerificationExpiry = TokenExpiry
+    await user.save({ validateBeforeSave: false })
 
     await sendEMail({
         email: user?.email,
@@ -49,12 +49,12 @@ const registerUser = asyncHandler(async (req, res) => {
         mailgenContent: emailVerificationMailContent(
             user?.username,
             // `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedTokens}`
-            `${process.env.BASE_URL}/api/v1/users/verify-email/${unHashedToken}`
+            `${process.env.BASE_URL}/api/v1/users/verify-email/${unHashedTokens}`
         )
     })
-    // with - will not send
+    // with - will not send to json in resposne 
     const createdUser = await User.findById(user._id).select(
-        '-password -refreshToken -emailVerficationToken -emailVerficationExpiry'
+        '-password -refreshToken -emailVerificationToken -emailVerificationExpiry'
     )
 
     if (!createdUser) {

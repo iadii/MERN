@@ -33,7 +33,7 @@ const sendEMail = async (options) => {
     }
 
     try{
-        await transporter.sendEMail(mail)
+        await transporter.sendMail(mail)
     }catch(error) {
         console.error("email service failed \n", error)
     }

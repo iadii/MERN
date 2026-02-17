@@ -31,7 +31,7 @@ const UserSchema = new Schema({
     },
     fullName: {
         type: String,
-        required: true,
+        // required: true,
         trim: true
     },
     password: {
@@ -56,11 +56,13 @@ const UserSchema = new Schema({
     forgotPasswordExpiry: {
         type: Date
     },
-    emailVerficationToken: {
-        type: String
+    emailVerificationToken: {
+        type: String,
+        // select: false
     },
-    emailVerficationExpiry: {
-        type: Date
+    emailVerificationExpiry: {
+        type: Date,
+        // select: false
     }
 }, {
     timestamps: true
@@ -71,7 +73,7 @@ const UserSchema = new Schema({
 UserSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next()
     this.password = await bcrypt.hash(this.password, 10)
-    next
+    next()
 })
 
 UserSchema.methods.isPasswordCorrect = async function (password) {
@@ -82,7 +84,7 @@ UserSchema.methods.generateAccessToken = function () {
 
     // jwt.sign({payload},secret, expiry)
     // we can leave secret , then jwt will use by default secret
-    jwt.sign(
+    return jwt.sign(
         {
             //this is more than enough for payload
             // we can access everything in db using _id(given by mognodb)
@@ -95,7 +97,7 @@ UserSchema.methods.generateAccessToken = function () {
 }
 
 UserSchema.methods.generateRefreshToken = function () {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
             username: this.username
@@ -114,7 +116,7 @@ UserSchema.methods.generateTemporaryToken = () => {
         .update(unHashedTokens)
         .digest("hex")
 
-    const TokenExpiry = Date.now() * (20 * 60 * 1000)
+    const TokenExpiry = Date.now() + (20 * 60 * 1000)
     return { unHashedTokens, hashedTokens, TokenExpiry }
 }
 
