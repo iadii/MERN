@@ -10,10 +10,12 @@ const sendEMail = async (options) => {
         }
     })
 
+    //  client automatically pick html or txt 
+    // text only when it doesnot supports html
     const emailTextual = mailGEnerator.generatePlaintext(options.mailgenContent)
     const emailHtml = mailGEnerator.generate(options.mailgenContent)
 
-    nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
         host: process.env.MAILTRAP_SMTP_HOST,
         port: process.env.MAILTRAP_SMTP_PORT,
         auth:{
@@ -21,6 +23,20 @@ const sendEMail = async (options) => {
             pass: process.env.MAILTRAP_SMTP_PASS
         }
     })
+
+    const mail = {
+        from: process.env.APP_MAIL,
+        to: options.email,
+        subject: options.subject,
+        text: emailTextual,
+        html: emailHtml
+    }
+
+    try{
+        await transporter.sendEMail(mail)
+    }catch(error) {
+        console.error("email service failed \n", error)
+    }
 }
 
 const emailVerificationMailContent = (username, verificationUrl) => {
@@ -61,4 +77,4 @@ const forgotPasswordMailContent = (username, passwordResetUrl) => {
     }
 }
 
-export { emailVerificationMailContent, forgotPasswordMailContent }
+export { emailVerificationMailContent, forgotPasswordMailContent, sendEMail }
