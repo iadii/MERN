@@ -1,6 +1,9 @@
 import express from 'express'
 import cors from 'cors'
+
 import healthCheck from './routes/healthCheck.routes.js';
+import authRouter from './routes/auth.routes.js'
+
 const app = express();
 
 app.use(express.json({limit: "16kb"}))
@@ -12,8 +15,11 @@ app.use(cors({
     allowedHeaders: ["Authorization", "Content-Type"]
 }))
 
+const prefix = '/api/v1'
+app.use(`${prefix}/healthcheck`, healthCheck)
 
-app.use('/api/v1/healthcheck', healthCheck)
+// auth
+app.use(`${prefix}/auth`, authRouter)
 
 app.get('/', (req, res) => {
     res.send("hii")

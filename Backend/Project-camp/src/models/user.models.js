@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
-import crypto from crypto
+import crypto from 'crypto'
 
 const UserSchema = new Schema({
     avatar: {
@@ -40,7 +40,7 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['user', 'admin', 'moderator'], 
+        enum: ['user', 'admin', 'moderator'],
         default: 'user'
     },
     isEmailVerified: {
@@ -118,5 +118,7 @@ UserSchema.methods.generateTemporaryToken = () => {
     return { unHashedTokens, hashedTokens, TokenExpiry }
 }
 
-mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
+
+export { User }
