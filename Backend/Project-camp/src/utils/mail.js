@@ -1,4 +1,27 @@
-import Mailgen from "mailgen";
+import Mailgen from 'mailgen';
+import nodemailer from 'nodemailer'
+
+const sendEMail = async (options) => {
+    const mailGEnerator = new Mailgen({
+        theme: 'salted',
+        product: {
+            name: process.env.APP_NAME,
+            link: process.env.APP_LINK
+        }
+    })
+
+    const emailTextual = mailGEnerator.generatePlaintext(options.mailgenContent)
+    const emailHtml = mailGEnerator.generate(options.mailgenContent)
+
+    nodemailer.createTransport({
+        host: process.env.MAILTRAP_SMTP_HOST,
+        port: process.env.MAILTRAP_SMTP_PORT,
+        auth:{
+            user: process.env.MAILTRAP_SMTP_USER,
+            pass: process.env.MAILTRAP_SMTP_PASS
+        }
+    })
+}
 
 const emailVerificationMailContent = (username, verificationUrl) => {
     return {
