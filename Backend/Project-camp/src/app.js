@@ -16,7 +16,7 @@ app.use(cors({
 app.use('/api/v1/healthcheck', healthCheck)
 
 app.get('/', (req, res) => {
-    res.send("")
+    res.send("hii")
 })
 
 export default app;     

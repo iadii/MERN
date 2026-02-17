@@ -1,7 +1,7 @@
 import { ApiResponse } from "../utils/api-response.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-//since we have created asunc handler util no  need of write try-catch
+//since we have created async handler util no  need of write try-catch
 /* const healthCheck = async (req, res, next) => {
   try {
     res
