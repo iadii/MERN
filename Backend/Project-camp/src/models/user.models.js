@@ -73,6 +73,9 @@ UserSchema.methods.isPasswordCorrect = async function (password) {
 }
 
 UserSchema.methods.generateAccessToken = function () {
+
+    // jwt.sign({payload},secret, expiry)
+    // we can leave secret , then jwt will use by default secret
     jwt.sign(
         {
             //this is more than enough for payload
