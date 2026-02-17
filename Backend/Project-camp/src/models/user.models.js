@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
+import crypto from crypto
 
 const UserSchema = new Schema({
     avatar: {
@@ -97,6 +98,19 @@ UserSchema.methods.generateRefreshToken = function () {
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
     )
+}
+
+// Temporary token (without data token)
+UserSchema.methods.generateTemporaryToken = () => {
+    const unHashedTokens = crypto.randomBytes(20).toString("hex")
+
+    const hashedTokens = crypto
+        .createHash("sha256")
+        .update(unHashedTokens)
+        .digest("hex")
+
+    const temporaryTokenExpiry = Date.now() * (20 * 60 * 1000)
+    return { unHashedTokens, hashedTokens, temporaryTokenExpiry }
 }
 
 mongoose.model("User", UserSchema);
