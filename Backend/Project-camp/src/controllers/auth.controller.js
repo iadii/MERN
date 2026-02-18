@@ -3,6 +3,7 @@ import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-error.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { sendEMail, emailVerificationMailContent } from "../utils/mail.js"
+import { use } from 'react';
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -79,6 +80,12 @@ const login = asyncHandler(async (req, res) => {
 
      if(!username || !email){
         throw new ApiError(400, "Email or Username is required", [])
+     }
+
+     const user = await User.findOne({email});
+
+     if(!user){
+        throw new ApiError(400, "User does not exist");
      }
 })
 
