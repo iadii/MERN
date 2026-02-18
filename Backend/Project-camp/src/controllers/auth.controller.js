@@ -3,7 +3,6 @@ import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-error.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { sendEMail, emailVerificationMailContent } from "../utils/mail.js"
-import { use } from 'react';
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -76,23 +75,51 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const login = asyncHandler(async (req, res) => {
-     const {email, password, username} = req.body;
+    const { email, password, username } = req.body;
 
-     if(!username || !email){
+    if (!username || !email) {
         throw new ApiError(400, "Email or Username is required", [])
-     }
+    }
 
-     const user = await User.findOne({email});
+    const user = await User.findOne({ email });
 
-     if(!user){
+    if (!user) {
         throw new ApiError(400, "User does not exist");
-     }
+    }
 
-     const isPasswordValid = await user.isPasswordCorrect()
+    const isPasswordValid = await user.isPasswordCorrect()
 
-     if(!isPasswordValid){
+    if (!isPasswordValid) {
         throw new ApiError(400, "Invalid credentials");
-     }
+    }
+
+    const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
+
+    const loggedInUser = await User.findById(user._id).select(
+        '-password -refreshToken -emailVerificationToken -emailVerificationExpiry'
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res
+        .status(201)
+        .cookie("access Token", accessToken, options)
+        .cookie("refresh Token", refreshToken, options)
+        .json(
+            new ApiResponse(200,
+                {
+                    user: loggedInUser,
+                    accessToken,
+                    refreshToken
+                },
+                "User logged in successfully"
+            )
+        )
+
+
 })
 
 export { registerUser, login }
