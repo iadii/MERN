@@ -2,7 +2,7 @@ import { body } from "express-validator";
 
 const userRegisterValidator = () => {
     return[
-        body("emai")
+        body("email")
             .trim()
             .notEmpty()
             .withMessage("Email is required")
@@ -33,7 +33,8 @@ const userRegisterValidator = () => {
 }
 const userLoginValidator = () => {
     return[
-        body("emai")
+        body("email")
+            .optional()
             .trim()
             .notEmpty()
             .withMessage("Email is required")
@@ -41,6 +42,7 @@ const userLoginValidator = () => {
             .withMessage("Email is invalid"),
 
         body("username")
+            .optional()
             .trim()
             .notEmpty()
             .withMessage("Username is required")

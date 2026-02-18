@@ -8,6 +8,7 @@ const router = Router();
 
 router.route('/register').post(userRegisterValidator(), validate, registerUser)
 
-router.route('login').post(userLoginValidator(), validate, login)
+router.route('/login').post(userLoginValidator(), validate, login)
+// router.route('login').post(login)
 
 export default router;
