@@ -89,6 +89,10 @@ const login = asyncHandler(async (req, res) => {
      }
 
      const isPasswordValid = await user.isPasswordCorrect()
+
+     if(!isPasswordValid){
+        throw new ApiError(400, "Invalid credentials");
+     }
 })
 
 export { registerUser, login }
