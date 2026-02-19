@@ -29,7 +29,7 @@ const login = asyncHandler(async (req, res) => {
     }
 
     return res
-        .status(201)
+        .status(200)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
