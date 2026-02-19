@@ -5,7 +5,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 const verifyJWT = asyncHandler(async (req, res, next) => {
     const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 
-    if(!token){
+    if (!token) {
         throw new ApiError(401, "Unauthorized request")
     }
 
@@ -15,7 +15,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
         const user = await User.findById(decodedToken?._id).select(
             '-password -refreshToken -emailVerificationToken -emailVerificationExpiry'
         )
-        if(!user){
+        if (!user) {
             throw new ApiError(401, 'Invalid access token')
         }
         req.user = user
@@ -24,3 +24,5 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
         throw new ApiError(401, 'Invalid access token')
     }
 })
+
+export { verifyJWT }
