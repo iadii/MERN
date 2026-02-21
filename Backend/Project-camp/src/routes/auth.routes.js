@@ -13,6 +13,6 @@ router.route('/register').post(userRegisterValidator(), validate, registerUser)
 
 router.route('/login').post(userLoginValidator(), validate, login)
 router.route('/logout').post(verifyJWT, logoutUser)
-router.route('/current-user').post(getCurrentUser)
+router.route('/current-user').get(getCurrentUser)
 
 export default router;

@@ -4,6 +4,7 @@ import { ApiError } from "../utils/api-error.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const getCurrentUser = asyncHandler(async(req, res) => {
+    
     return res
             .status(200)
             .json(
