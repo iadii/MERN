@@ -42,11 +42,12 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
                 .json(
                     new ApiResponse(
                         200,
-                        {accessToken, refreshToken}
+                        {accessToken, refreshToken},
+                        "Acess token refresh"
                     )
                 )
     } catch (error) {
-
+        throw new ApiError(401, "Invalid refresh token")
     }
 })
 
