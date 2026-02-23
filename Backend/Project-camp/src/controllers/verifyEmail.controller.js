@@ -78,4 +78,4 @@ const resendEMailVerification = asyncHandler(async (req, res) => {
         )
 })
 
-export { verifyEmail }
+export { verifyEmail, resendEMailVerification }
