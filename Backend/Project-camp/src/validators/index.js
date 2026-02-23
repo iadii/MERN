@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 
 const userRegisterValidator = () => {
-    return[
+    return [
         body("email")
             .trim()
             .notEmpty()
@@ -15,24 +15,24 @@ const userRegisterValidator = () => {
             .withMessage("Username is required")
             .isLowercase()
             .withMessage("Username must be in lowercase")
-            .isLength({min: 3})
+            .isLength({ min: 3 })
             .withMessage("Username must be atleast 3 characters"),
 
         body("password")
             .trim()
             .notEmpty()
             .withMessage("Password is required")
-            .isLength({min: 8})
+            .isLength({ min: 8 })
             .withMessage("Password must be atleast 8 character"),
-        
+
         body("fullname")
             .optional()
-            .trim()                
+            .trim()
 
     ]
 }
 const userLoginValidator = () => {
-    return[
+    return [
         body("email")
             .optional()
             .trim()
@@ -48,17 +48,55 @@ const userLoginValidator = () => {
             .withMessage("Username is required")
             .isLowercase()
             .withMessage("Username must be in lowercase")
-            .isLength({min: 3})
+            .isLength({ min: 3 })
             .withMessage("Username must be atleast 3 characters"),
 
         body("password")
             .trim()
             .notEmpty()
             .withMessage("Password is required")
-            .isLength({min: 8})
-            .withMessage("Password must be atleast 8 character"),              
+            .isLength({ min: 8 })
+            .withMessage("Password must be atleast 8 character"),
 
     ]
 }
 
-export { userRegisterValidator, userLoginValidator }
+const userChangeCurrentPasswordValidator = () => {
+    return [
+        body("oldPassword")
+            .notEmpty()
+            .withMessage("Old password is required"),
+        body("newPassword")
+            .notEmpty()
+            .withMessage("New password is required"),
+    ]
+}
+
+const userForgotPasswordValidator = () => {
+    return [
+        body("email")
+            .notEmpty()
+            .withMessage("Email is required")
+            .isEmail()
+            .withMessage("Email is invalid")
+    ]
+}
+const userResetForgotPasswordValidator = () => {
+    return [
+         body("newPassword")
+            .notEmpty()
+            .withMessage("Password is required")
+    ]
+}
+
+
+
+
+export { 
+    userRegisterValidator, 
+    userLoginValidator, 
+    userChangeCurrentPasswordValidator, 
+    userForgotPasswordValidator, 
+    userForgotPasswordValidator, 
+    userResetForgotPasswordValidator 
+}
