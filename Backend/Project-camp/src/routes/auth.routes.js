@@ -16,7 +16,6 @@ import {
     userLoginValidator,
     userChangeCurrentPasswordValidator,
     userForgotPasswordValidator,
-    userForgotPasswordValidator,
     userResetForgotPasswordValidator
 } from "../validators/index.js"
 

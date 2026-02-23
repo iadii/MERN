@@ -97,6 +97,5 @@ export {
     userLoginValidator, 
     userChangeCurrentPasswordValidator, 
     userForgotPasswordValidator, 
-    userForgotPasswordValidator, 
     userResetForgotPasswordValidator 
 }
