@@ -25,9 +25,15 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
         mailgenContent: forgotPasswordMailContent(
             user?.username,
             // `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedTokens}`
-            `${process.env.BASE_URL}/api/v1/users/verify-email/${unHashedTokens}`
+            `${process.env.FORGOT_PASSWORD_REDIRECT_URL}/${unHashedTokens}`
         )
     })
+
+    return res
+            .status(200)
+            .json(
+                new ApiResponse(200, {}, "Password reset mail has been sent on your email")
+            )
 })
 
 export { forgotPasswordRequest }
