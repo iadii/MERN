@@ -21,8 +21,6 @@ import {
 } from "../validators/index.js"
 
 
-
-
 const router = Router();
 
 // unsecured routes
