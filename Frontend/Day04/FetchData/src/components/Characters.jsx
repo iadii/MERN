@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 export function Character(){
 
     const [cast, setCast] = useState([])
-
     useEffect(() => {
         fetch('https://potterapi-fedeperin.vercel.app/es/characters')
         .then( async (res) => {
@@ -21,6 +20,7 @@ export function Character(){
                 <div className="text-2xl text-left font-medium text-blue-50">Name: {sc.fullName} </div>
                 {/* <div>aka {sc.nickname}</div> */}
                 <div className="font-medium text-sky-500">Hogwart's house: {sc.hogwartsHouse}</div>
+                <div className="font-medium text-yellow-500">Birthdate: {sc.birthdate}</div>
                 <div className="flex gap-2 font-medium text-gray-600 dark:text-gray-400">children {sc.children.length}</div>
              </div>
            </div>

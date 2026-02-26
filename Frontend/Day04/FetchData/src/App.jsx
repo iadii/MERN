@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { spell } from './components/spellFetch'
+import { Spell } from './components/SpellFetch'
 import { Character } from './components/Characters'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <spell />
+      {/* <Spell /> */}
       <Character />
     </>
   )

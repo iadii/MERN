@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function spell() {
+export function Spell() {
   const [spell, setSpell] = useState([]);
 
   useEffect(() => {
@@ -23,3 +23,4 @@ export function spell() {
     </div>
   );
 }
+
