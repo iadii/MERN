@@ -29,10 +29,10 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
     })
 
     return res
-            .status(200)
-            .json(
-                new ApiResponse(200, {}, "Password reset mail has been sent on your email")
-            )
+        .status(200)
+        .json(
+            new ApiResponse(200, {}, "Password reset mail has been sent on your email")
+        )
 })
 
 export { forgotPasswordRequest }

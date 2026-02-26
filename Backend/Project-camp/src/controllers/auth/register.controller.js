@@ -76,4 +76,4 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 
-export { registerUser,  generateAccessAndRefreshToken }
+export { registerUser, generateAccessAndRefreshToken }

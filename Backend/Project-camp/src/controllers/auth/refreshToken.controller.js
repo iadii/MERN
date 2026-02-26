@@ -21,7 +21,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             throw new ApiError(401, "Invalid refresh token")
         }
 
-        if (incomingRefreshToken !== user?.refreshToken){
+        if (incomingRefreshToken !== user?.refreshToken) {
             throw new ApiError(401, "Expired refresh token")
         }
 
@@ -30,22 +30,22 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
             secure: true
         }
 
-        const {accessToken, refreshToken: newRefreshToken} = await generateAccessAndRefreshToken(user._id)
+        const { accessToken, refreshToken: newRefreshToken } = await generateAccessAndRefreshToken(user._id)
 
         user.refreshToken = newRefreshToken
         await user.save()
 
         return res
-                .status(200)
-                .cookie("accessToken", accessToken, options )
-                .cookie("refreshToken", newRefreshToken, options )
-                .json(
-                    new ApiResponse(
-                        200,
-                        {accessToken, refreshToken},
-                        "Acess token refresh"
-                    )
+            .status(200)
+            .cookie("accessToken", accessToken, options)
+            .cookie("refreshToken", newRefreshToken, options)
+            .json(
+                new ApiResponse(
+                    200,
+                    { accessToken, refreshToken },
+                    "Acess token refresh"
                 )
+            )
     } catch (error) {
         throw new ApiError(401, "Invalid refresh token")
     }

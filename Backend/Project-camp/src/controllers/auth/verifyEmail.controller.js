@@ -40,14 +40,14 @@ const verifyEmail = asyncHandler(async (req, res) => {
         )
 })
 const resendEMailVerification = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user?._id );
-    if(!user){
+    const user = await User.findById(req.user?._id);
+    if (!user) {
         throw new ApiError(
             404, "User does not exist"
         )
     }
 
-    if(user.isEmailVerified){
+    if (user.isEmailVerified) {
         throw new ApiError(409, "EMail is already verified")
     }
 
@@ -68,7 +68,7 @@ const resendEMailVerification = asyncHandler(async (req, res) => {
     })
 
     return res
-        .status(200)  
+        .status(200)
         .json(
             new ApiResponse(
                 200,
