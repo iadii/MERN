@@ -1,15 +1,15 @@
 import { Router } from "express"
-import { registerUser } from "../controllers/register.controller.js"
+import { registerUser } from "../controllers/auth/register.controller.js"
 import { validate } from "../middlewares/validator.middleware.js"
-import { logoutUser } from "../controllers/logout.controller.js";
+import { logoutUser } from "../controllers/auth/logout.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { login } from "../controllers/login.controller.js";
-import { getCurrentUser } from "../controllers/currentUser.controller.js";
-import { verifyEmail, resendEMailVerification } from "../controllers/verifyEmail.controller.js";
-import { refreshAccessToken } from "../controllers/refreshToken.controller.js";
-import { forgotPasswordRequest } from "../controllers/forgotpasswordRequest.controller.js";
-import { resetForgotPassword } from "../controllers/resetPassword.controller.js";
-import { changeCurrentPassword } from "../controllers/changePassword.controller.js";
+import { login } from "../controllers/auth/login.controller.js";
+import { getCurrentUser } from "../controllers/auth/currentUser.controller.js";
+import { verifyEmail, resendEMailVerification } from "../controllers/auth/verifyEmail.controller.js";
+import { refreshAccessToken } from "../controllers/auth/refreshToken.controller.js";
+import { forgotPasswordRequest } from "../controllers/auth/forgotpasswordRequest.controller.js";
+import { resetForgotPassword } from "../controllers/auth/resetPassword.controller.js";
+import { changeCurrentPassword } from "../controllers/auth/changePassword.controller.js";
 
 import {
     userRegisterValidator,
