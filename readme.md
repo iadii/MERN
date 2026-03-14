@@ -56,4 +56,4 @@ Once we add backend code under Backend/:
 - Learn data modeling and querying with MongoDB and PostgreSQL
 - Understand environment-based configuration and clean project structure
 
-Happy learning and building ❤️
+Happy learning and building <)
